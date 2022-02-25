@@ -7,7 +7,9 @@ class WeatherOutput extends React.Component {
 
     render() {
         return(
-            <div></div>
+            <div>
+                <h1>Hello There</h1>
+            </div>
         )
     }
 }
