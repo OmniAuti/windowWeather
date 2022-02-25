@@ -14,6 +14,7 @@ class InputZip extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log(this.state.zip)
     this.props.handleSubmitZip(this.state.zip)
     this.setState({zip: ''})
   }
