@@ -31,7 +31,7 @@ class WindowWeather extends React.Component {
                     </div>
                     <InputZip handleSubmitZip={this.handleNewZip}/>
                 </div>
-                <Window/>
+                <Window weatherID={this.state.api.weather} isLoaded={this.state.isLoaded}/>
                 <div className="temp-container">
                {this.state.isLoaded && <p>{main.temp} <span>&#176;F</span>
                 </p>} 
