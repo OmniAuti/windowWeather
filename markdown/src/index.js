@@ -11,18 +11,6 @@ class WindowWeather extends React.Component {
         this.state = ({api: [], isLoaded: false, zipCode: ''})
     }
 
-
-    componentDidMount() {
-        setTimeout(() => {
-            this.getWeather()
-        }, 1000)
-    }
-
-    getWeather() {
-        var api = `https://api.openweathermap.org/data/2.5/weather?q=chicago&appid=07d208f726a6eed3c065b6ee7c138516&units=imperial`;
-        fetch(api).then(response => response.json()).then(data => this.setState({api: data, isLoaded: true}))
-    }
-
     handleNewZip = async (zip) => {
         const zipcodeAPI = `http://api.openweathermap.org/geo/1.0/zip?zip=${zip},US&appid=07d208f726a6eed3c065b6ee7c138516&units=imperial`;
         const getLocation = await fetch(zipcodeAPI);
@@ -30,21 +18,24 @@ class WindowWeather extends React.Component {
         var newLocation = await data.name;
         // RECALL API TO GET ALL INFO
         var api = `https://api.openweathermap.org/data/2.5/weather?q=${newLocation}&appid=07d208f726a6eed3c065b6ee7c138516&units=imperial`;
-        const newLocationData = await fetch(api).then(res => res.json()).then(data =>  this.setState({ api:data,}, console.log(data)))
+        const newLocationData = await fetch(api).then(res => res.json()).then(data =>  this.setState({ api:data, isLoaded: true}, console.log(data)))
     }
 
     render() {
-        const {name} = this.state.api
-        console.log('derp')
+        const {name, main} = this.state.api
         return(
             <div className="container">
-                   <div>
-                <h1>Where?</h1>
-                 <p>{name}</p>
+                <div className="header">
+                    <div>
+                    {this.state.isLoaded ? <h1>{name}</h1> : <h1>Enter Location</h1>}
+                    </div>
+                    <InputZip handleSubmitZip={this.handleNewZip}/>
                 </div>
-                <InputZip handleSubmitZip={this.handleNewZip}/>
                 <Window/>
-             
+                <div className="temp-container">
+               {this.state.isLoaded && <p>{main.temp} <span>&#176;F</span>
+                </p>} 
+                </div>
             </div>
         )
     }
