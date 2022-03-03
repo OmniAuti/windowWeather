@@ -8,14 +8,28 @@ class Window extends React.Component {
     }
     
     handleIcon(id) {
-        id = id + 1
+        if (id >= 200 && id <= 232) { // THUNDER STORM
+
+        } else if (id >= 300 && id <= 321) { // DRIZZLE
+            
+        } else if (id >= 500 && id <= 531) { // RAIN
+
+        } else if (id >= 600 && id <= 622) { // SNOW
+            
+            
+        } else { // CLOUDY AND SUNNY
+
+
         switch (id) {
-            case 800:return <img className="sun" src="img/sun.svg" />
-            break;
-            case 801: return <img className="cloud" src="img/cloud.svg"/>
-            default: <p>{id}</p>
+            case 800:return <img className="sun" src="img/sun.svg" />; // SUNNY
+            case 801: return <div className="weather--container"><img className="cloud" src="img/cloud.svg"/><img className="sun" src="img/sun.svg"/></div>; // FEW CLOUDS
+            case 802: return <div className="weather--container"><img className="cloud" src="img/cloud.svg"/><img className="cloud-two" src="img/cloud.svg"/><img className="sun" src="img/sun.svg"/></div>; // SCATTERED CLOUDS
+            case 803: return <div className="weather--container"><img className="cloud" src="img/cloud.svg"/><img className="cloud-three" src="img/cloud.svg"/><img className="cloud-four" src="img/cloud.svg"/><img className="cloud-two" src="img/cloud.svg"/><img className="sun" src="img/sun.svg"/></div>; // BROKEN CLOUDS
+            case 804: return <div className="weather--container"><img className="cloud" src="img/cloud.svg"/><img className="cloud-three" src="img/cloud.svg"/><img className="cloud-four" src="img/cloud.svg"/><img className="cloud-five" src="img/cloud.svg"/><img className="cloud-six" src="img/cloud.svg"/><img className="cloud-four" src="img/cloud.svg"/><img className="cloud-two" src="img/cloud.svg"/><img className="sun" src="img/sun.svg"/></div>; // OVERCAST
+            default: <p>{id}</p>;
         }
-        return id;
+    }
+
     }
 
     render() {
