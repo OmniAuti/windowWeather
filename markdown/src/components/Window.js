@@ -8,24 +8,24 @@ class Window extends React.Component {
     }
     
     handleIcon(id) {
+        id = 600
         if (id >= 200 && id <= 232) { // THUNDER STORM
-
+                return <div className="weather--container"><img className="storm" src="img/storm.svg" alt="thunderstorm"/><img className="storm--two" src="img/storm.svg" alt="thunderstorm"/><img className="rain" src="img/rain.svg" alt="rain"/><img className="rain--two" src="img/rain.svg" alt="rain"/></div>
         } else if (id >= 300 && id <= 321) { // DRIZZLE
-            
+                return <div className="weather--container"><img className="rain" src="img/drizzle.svg" alt="drizzle"/><img className="sun" src="img/sun.svg" alt="sun"/></div>
         } else if (id >= 500 && id <= 531) { // RAIN
-
+            return <div className="weather--container"><img className="rain" src="img/rain.svg" alt="rain"/><img className="rain--two" src="img/rain.svg" alt="rain"/></div>
         } else if (id >= 600 && id <= 622) { // SNOW
-            
+            return <div className="weather--container"><img className="snow--two" src="img/snow.svg" alt="snow"/><img className="snow" src="img/snow.svg" alt="snow"/><img className="snowman" src="img/snowman.svg" alt="snowman"/><img className="cloud" src="img/greycloud.svg" alt="cloud"/><img className="cloud-three" src="img/greycloud.svg" alt="cloud"/><img className="cloud-four" src="img/greycloud.svg" alt="cloud"/><img className="cloud-five" src="img/greycloud.svg" alt="cloud"/><img className="cloud-six" src="img/greycloud.svg" alt="cloud"/><img className="cloud-four" src="img/greycloud.svg" alt="cloud"/><img className="cloud-two" src="img/greycloud.svg" alt="cloud"/></div>; // OVERCAST
+
             
         } else { // CLOUDY AND SUNNY
-
-
         switch (id) {
-            case 800:return <img className="sun" src="img/sun.svg" />; // SUNNY
-            case 801: return <div className="weather--container"><img className="cloud" src="img/cloud.svg"/><img className="sun" src="img/sun.svg"/></div>; // FEW CLOUDS
-            case 802: return <div className="weather--container"><img className="cloud" src="img/cloud.svg"/><img className="cloud-two" src="img/cloud.svg"/><img className="sun" src="img/sun.svg"/></div>; // SCATTERED CLOUDS
-            case 803: return <div className="weather--container"><img className="cloud" src="img/cloud.svg"/><img className="cloud-three" src="img/cloud.svg"/><img className="cloud-four" src="img/cloud.svg"/><img className="cloud-two" src="img/cloud.svg"/><img className="sun" src="img/sun.svg"/></div>; // BROKEN CLOUDS
-            case 804: return <div className="weather--container"><img className="cloud" src="img/cloud.svg"/><img className="cloud-three" src="img/cloud.svg"/><img className="cloud-four" src="img/cloud.svg"/><img className="cloud-five" src="img/cloud.svg"/><img className="cloud-six" src="img/cloud.svg"/><img className="cloud-four" src="img/cloud.svg"/><img className="cloud-two" src="img/cloud.svg"/><img className="sun" src="img/sun.svg"/></div>; // OVERCAST
+            case 800: return <img className="sun" src="img/sun.svg" />; // SUNNY
+            case 801: return <div className="weather--container"><img className="cloud" src="img/cloud.svg" alt="cloud"/><img className="sun" src="img/sun.svg" alt="sun"/></div>; // FEW CLOUDS
+            case 802: return <div className="weather--container"><img className="cloud" src="img/cloud.svg" alt="cloud"/><img className="cloud-two" src="img/cloud.svg" alt="cloud"/><img className="sun" src="img/sun.svg" alt="sun"/></div>; // SCATTERED CLOUDS
+            case 803: return <div className="weather--container"><img className="cloud" src="img/cloud.svg" alt="cloud"/><img className="cloud-three" src="img/cloud.svg" alt="cloud"/><img className="cloud-four" src="img/cloud.svg" alt="cloud"/><img className="cloud-two" src="img/cloud.svg" alt="cloud"/><img className="sun" src="img/sun.svg" alt="sun"/></div>; // BROKEN CLOUDS
+            case 804: return <div className="weather--container"><img className="cloud" src="img/greycloud.svg" alt="cloud"/><img className="cloud-three" src="img/greycloud.svg" alt="cloud"/><img className="cloud-four" src="img/greycloud.svg" alt="cloud"/><img className="cloud-five" src="img/greycloud.svg" alt="cloud"/><img className="cloud-six" src="img/greycloud.svg" alt="cloud"/><img className="cloud-four" src="img/greycloud.svg" alt="cloud"/><img className="cloud-two" src="img/greycloud.svg" alt="cloud"/></div>; // OVERCAST
             default: <p>{id}</p>;
         }
     }
