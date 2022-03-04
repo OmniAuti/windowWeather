@@ -85,6 +85,18 @@ body {
   z-index: 99;
 }
 
+
+
+
+.tree {
+position: absolute;
+width: 100px;
+height: 100px;
+left: 50px;
+bottom:50px;
+}
+
+
 .form input:first-of-type {
   margin-right: 5px;
   width: 60px;
