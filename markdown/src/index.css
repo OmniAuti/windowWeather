@@ -240,3 +240,104 @@ bottom:50px;
   right: 0px;
   bottom: -150px;
 }
+
+
+.mist {
+position: absolute;
+width: 100%;
+height: 100%;
+z-index: 95;
+backdrop-filter: blur(5px);
+background-color: #d9edff;
+opacity: 0.25;
+}
+
+.smoke {
+  position: absolute;
+  backdrop-filter: blur(10px);
+  background-color: #817b7b;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  z-index: 95;
+}
+
+.haze {
+  position: absolute;
+  backdrop-filter: blur(2.5px);
+  width: 100%;
+  height: 100%;
+  z-index: 95;
+  background-color: #e6dcdc;
+  opacity: 0.5;
+}
+
+.dust {
+  position: absolute;
+  backdrop-filter: blur(2.5px);
+  width: 100%;
+  height: 100%;
+  z-index: 95;
+  background-color: #dbdbdb;
+  opacity: 0.25;
+}
+
+.fog {
+  position: absolute;
+  backdrop-filter: blur(2.5px);
+  width: 100%;
+  height: 100%;
+  z-index: 95;
+  background-color: #a5a5a5;
+  opacity: 0.75;
+}
+
+.sand {
+  position: absolute;
+  backdrop-filter: blur(2.5px);
+  width: 100%;
+  height: 100%;
+  z-index: 95;
+  background-color: #c7adad;
+  opacity: 0.5;
+}
+
+.dust {
+  position: absolute;
+  backdrop-filter: blur(2.5px);
+  width: 100%;
+  height: 100%;
+  z-index: 95;
+  background-color: #c5b8b8;
+  opacity: 0.5;
+}
+
+.ash {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 95;
+  background-color: #777272;
+  opacity: 0.5;
+  backdrop-filter: blur(5px);
+}
+
+.wind {
+  position: absolute;
+  height: 100px;
+  bottom: 150px;
+  left: 25px;
+}
+.wind-two {
+  position: absolute;
+  height: 150px;
+  bottom: 20px;
+  right: 50px;
+}
+
+.tornado {
+  position: absolute;
+  height: 200px;
+  top: 100px;
+  right: 50px;
+}
