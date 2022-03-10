@@ -34,7 +34,7 @@ export default class Temperature extends React.Component {
       <div className="temp-container">
         <p className="actual-temp-container">
           {this.state.convert ? this.props.temperature.toFixed(0) : this.state.degree}
-          <span className="degree-symbol">&#176;{this.state.convert ? "F" : "C"}</span>
+          <sup className="degree-symbol">&#176;{this.state.convert ? "F" : "C"}</sup>
         </p>
         <button className="convert-btn" onClick={this.handleTempChange}>C/F</button>
       </div>

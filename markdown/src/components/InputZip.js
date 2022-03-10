@@ -1,33 +1,51 @@
-import React from 'react'
+import React from "react";
 
 class InputZip extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = {zip: ''}
+    super(props);
+    this.state = { zip: "" };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   handleChange(e) {
-    this.setState({zip: e.target.value})
+    this.setState({ zip: e.target.value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    if (this.state.zip == '') return alert('Enter a valid Zip Code.')
-    if (isNaN(this.state.zip)) return alert('Enter a valid Zip Code.')
-    this.props.handleSubmitZip(this.state.zip)
-    this.setState({zip: ''})
+    if (this.state.zip.length < 5) return alert("Enter a valid Zip Code.");
+    if (this.state.zip == "" || this.state.zip == " ")
+      return alert("Enter a valid Zip Code.");
+    if (isNaN(this.state.zip)) return alert("Enter a valid Zip Code.");
+
+    this.props.handleSubmitZip(this.state.zip);
+    this.setState({ zip: "" });
+  }
+
+  handleKeyPress(e) {
+    const code = e.keyCode || e.which;
+    if (code === 13) {
+      this.handleSubmit(e);
+    }
   }
 
   render() {
-    return(
+    return (
       <form className="form" onSubmit={this.handleSubmit}>
-      <input value={this.state.zip} placeholder="Zip Code" onChange={this.handleChange} maxLength="5" type="text"/>
-      <input type="submit" value="Search"/>
-      </form> 
-    )
+        <input
+          value={this.state.zip}
+          placeholder="Zip Code"
+          onKeyPress={this.handleKeyPress}
+          onChange={this.handleChange}
+          maxLength="5"
+          type="text"
+        />
+        <input type="submit" value="Submit" />
+      </form>
+    );
   }
 }
 
-export default InputZip
+export default InputZip;

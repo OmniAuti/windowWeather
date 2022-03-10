@@ -11,6 +11,25 @@ class WindowWeather extends React.Component {
     this.state = { api: [], isLoaded: false, zipCode: "" };
   }
 
+  componentDidMount() {
+    if (window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(success, error)
+  }
+
+  function success(pos) {
+    var crd = pos.coords;
+  
+    console.log('Your current position is:');
+    console.log(`Latitude : ${crd.latitude}`);
+    console.log(`Longitude: ${crd.longitude}`);
+    console.log(`More or less ${crd.accuracy} meters.`);
+  }
+  
+  function error(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+  }
+
   handleNewZip = async (zip) => {
     const zipcodeAPI = `http://api.openweathermap.org/geo/1.0/zip?zip=${zip},US&appid=07d208f726a6eed3c065b6ee7c138516&units=imperial`;
     const getLocation = await fetch(zipcodeAPI);
