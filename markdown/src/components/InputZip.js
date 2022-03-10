@@ -14,9 +14,8 @@ class InputZip extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    if (this.state.zip == '') return alert('Enter a valid Zip Code.')
     if (isNaN(this.state.zip)) return alert('Enter a valid Zip Code.')
-
-    console.log(this.state.zip)
     this.props.handleSubmitZip(this.state.zip)
     this.setState({zip: ''})
   }
@@ -25,7 +24,7 @@ class InputZip extends React.Component {
     return(
       <form className="form" onSubmit={this.handleSubmit}>
       <input value={this.state.zip} placeholder="Zip Code" onChange={this.handleChange} maxLength="5" type="text"/>
-      <input type="submit"/>
+      <input type="submit" value="Search"/>
       </form> 
     )
   }

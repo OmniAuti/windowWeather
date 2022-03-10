@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import WeatherOutput from "./components/WeatherOutput";
 import Window from "./components/Window";
 import InputZip from "./components/InputZip";
+import Temperature from './components/Temperature'
 
 class WindowWeather extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class WindowWeather extends React.Component {
     const newLocationData = await fetch(api)
       .then((res) => res.json())
       .then((data) =>
-        this.setState({ api: data, isLoaded: true }, console.log(data))
+        this.setState({ api: data, isLoaded: true })
       );
   };
 
@@ -39,32 +39,10 @@ class WindowWeather extends React.Component {
           weatherID={this.state.api.weather}
           isLoaded={this.state.isLoaded}
         />
-        <div className="temp-container">
-          {this.state.isLoaded && (
-            <p>
-              {main.temp} <span>&#176;F</span>
-            </p>
-          )}
-        </div>
+        {this.state.isLoaded && (<Temperature temperature={main.temp}/>)}
       </div>
     );
   }
 }
 
 ReactDOM.render(<WindowWeather />, document.getElementById("root"));
-
-/*
- const handleSubmit = async (e) => {
-    e.preventDefault();
-    var zipCode = this.state.inputVal;
-   // LOOK UP ZIPCODE TO GET LOCATION NAME
-    let zipcodeAPI = `http://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},US&appid=07d208f726a6eed3c065b6ee7c138516&units=imperial`;
-    const getLocation = await fetch(zipcodeAPI);
-    const data = await getLocation.json()
-    var newLocation = await data.name;
-      
-// RECALL API TO GET ALL INFO
-      var api = `https://api.openweathermap.org/data/2.5/weather?q=${newLocation}&appid=07d208f726a6eed3c065b6ee7c138516&units=imperial`;
-      const newLocationData = await fetch(api).then(res => res.json()).then(data =>  this.setState({ isLoaded: true, items: data }, console.log(data)))
-  };
-*/
