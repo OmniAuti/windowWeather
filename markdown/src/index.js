@@ -14,11 +14,11 @@ class WindowWeather extends React.Component {
     this.successLatLong = this.successLatLong.bind(this)
     this.errorLatLong = this.errorLatLong.bind(this)
   }
-/*
+
   componentDidMount() {
     this.handleLatLong();
   }
-*/
+
   handleLatLong() {
     if (window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition(this.successLatLong, this.errorLatLong);
