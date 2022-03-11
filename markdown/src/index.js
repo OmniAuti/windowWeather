@@ -14,11 +14,11 @@ class WindowWeather extends React.Component {
     this.successLatLong = this.successLatLong.bind(this)
     this.errorLatLong = this.errorLatLong.bind(this)
   }
-
+/*
   componentDidMount() {
     this.handleLatLong();
   }
-
+*/
   handleLatLong() {
     if (window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition(this.successLatLong, this.errorLatLong);
@@ -83,7 +83,7 @@ class WindowWeather extends React.Component {
       <div className="container">
         <div className="header">
           <div>
-            {this.state.isLoaded ? <h1>{name}</h1> : <h1>Enter Location</h1>}
+            {this.state.isLoaded ? <h1>{name}</h1> : <h1>Enter Location<div className="loading-location"></div></h1>}
           </div>
           <InputZip handleSubmitZip={this.handleNewZip} />
         </div>
