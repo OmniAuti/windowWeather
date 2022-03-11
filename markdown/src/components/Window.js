@@ -8,6 +8,14 @@ class Window extends React.Component {
   }
 
   handleIcon(id) {
+    //HANDLES DAY AND NIGHT CYCLE
+    let sunMoon;
+    if (this.props.dayNight) {
+      sunMoon = "img/sun.svg";
+    } else {
+      sunMoon = "img/moon.svg";
+    }
+
     if (id >= 200 && id <= 232) {
       // THUNDER STORM
       return (
@@ -23,7 +31,7 @@ class Window extends React.Component {
       return (
         <div className="weather--container">
           <img className="rain" src="img/drizzle.svg" alt="drizzle" />
-          <img className="sun" src="img/sun.svg" alt="sun" />
+          <img className="sun" src={sunMoon} alt="sun" />
         </div>
       );
     } else if (id >= 500 && id <= 531) {
@@ -56,7 +64,7 @@ class Window extends React.Component {
           return (
             <div>
               <div className="mist"></div>{" "}
-              <img className="sun" src="img/sun.svg" alt="sun" />
+              <img className="sun" src={sunMoon} alt="sun" />
             </div>
           );
 
@@ -64,49 +72,49 @@ class Window extends React.Component {
           return (
             <div>
               <div className="smoke"></div>{" "}
-              <img className="sun" src="img/sun.svg" alt="sun" />
+              <img className="sun" src={sunMoon} alt="sun" />
             </div>
           );
         case 721: // HAZE
           return (
             <div>
               <div className="haze"></div>{" "}
-              <img className="sun" src="img/sun.svg" alt="sun" />
+              <img className="sun" src={sunMoon} alt="sun" />
             </div>
           );
         case 731: // DUST
           return (
             <div>
               <div className="dust"></div>{" "}
-              <img className="sun" src="img/sun.svg" alt="sun" />
+              <img className="sun" src={sunMoon} alt="sun" />
             </div>
           );
         case 741: // FOG
           return (
             <div>
               <div className="fog"></div>{" "}
-              <img className="sun" src="img/sun.svg" alt="sun" />
+              <img className="sun" src={sunMoon} alt="sun" />
             </div>
           );
         case 751: // SAND
           return (
             <div>
               <div className="sand"></div>{" "}
-              <img className="sun" src="img/sun.svg" alt="sun" />
+              <img className="sun" src={sunMoon} alt="sun" />
             </div>
           );
         case 761: // DUST
           return (
             <div>
               <div className="dust"></div>{" "}
-              <img className="sun" src="img/sun.svg" alt="sun" />
+              <img className="sun" src={sunMoon} alt="sun" />
             </div>
           );
         case 762: // ASH
           return (
             <div>
               <div className="ash"></div>{" "}
-              <img className="sun" src="img/sun.svg" alt="sun" />
+              <img className="sun" src={sunMoon} alt="sun" />
             </div>
           );
         case 771: //SQUALL
@@ -121,7 +129,7 @@ class Window extends React.Component {
                 alt="cloud"
               />
               <img className="cloud-four" src="img/greycloud.svg" alt="cloud" />
-              <img className="sun" src="img/sun.svg" alt="sun" />
+              <img className="sun" src={sunMoon} alt="sun" />
             </div>
           );
         case 781: // TORNADO
@@ -142,12 +150,12 @@ class Window extends React.Component {
             </div>
           );
         case 800:
-          return <img className="sun" src="img/sun.svg" />; // SUNNY
+          return <img className="sun" src={sunMoon} />; // SUNNY
         case 801:
           return (
             <div className="weather--container">
               <img className="cloud" src="img/cloud.svg" alt="cloud" />
-              <img className="sun" src="img/sun.svg" alt="sun" />
+              <img className="sun" src={sunMoon} alt="sun" />
             </div>
           ); // FEW CLOUDS
         case 802:
@@ -155,7 +163,7 @@ class Window extends React.Component {
             <div className="weather--container">
               <img className="cloud" src="img/cloud.svg" alt="cloud" />
               <img className="cloud-two" src="img/cloud.svg" alt="cloud" />
-              <img className="sun" src="img/sun.svg" alt="sun" />
+              <img className="sun" src={sunMoon} alt="sun" />
             </div>
           ); // SCATTERED CLOUDS
         case 803:
@@ -165,7 +173,7 @@ class Window extends React.Component {
               <img className="cloud-three" src="img/cloud.svg" alt="cloud" />
               <img className="cloud-four" src="img/cloud.svg" alt="cloud" />
               <img className="cloud-two" src="img/cloud.svg" alt="cloud" />
-              <img className="sun" src="img/sun.svg" alt="sun" />
+              <img className="sun" src={sunMoon} alt="sun" />
             </div>
           ); // BROKEN CLOUDS
         case 804:
@@ -194,7 +202,7 @@ class Window extends React.Component {
     //    const {weather} = this.props.weatherIconCheck;
     return (
       <div className="window-container">
-        <div className="window">
+        <div className="window" style={this.props.dayNight ? {backgroundColor: '#83a8ee'} :{backgroundColor: '#131822'}}>
           {this.props.isLoaded && (
             <div>{this.handleIcon(this.props.weatherID[0].id)}</div>
           )}

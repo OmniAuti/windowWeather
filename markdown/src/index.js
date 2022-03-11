@@ -8,11 +8,12 @@ import Temperature from "./components/Temperature";
 class WindowWeather extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { api: [], isLoaded: false, zipCode: "" };
+    this.state = { api: [], isLoaded: false, zipCode: "", sun: true };
 
     this.handleLatLong = this.handleLatLong.bind(this);
-    this.successLatLong = this.successLatLong.bind(this)
-    this.errorLatLong = this.errorLatLong.bind(this)
+    this.successLatLong = this.successLatLong.bind(this);
+    this.errorLatLong = this.errorLatLong.bind(this);
+    this.handleTimeSunMoon = this.handleTimeSunMoon.bind(this);
   }
 
   componentDidMount() {
@@ -21,15 +22,17 @@ class WindowWeather extends React.Component {
 
   handleLatLong() {
     if (window.navigator.geolocation) {
-      window.navigator.geolocation.getCurrentPosition(this.successLatLong, this.errorLatLong);
+      window.navigator.geolocation.getCurrentPosition(
+        this.successLatLong,
+        this.errorLatLong
+      );
     }
   }
 
- successLatLong(pos) {
+  successLatLong(pos) {
     var crd = pos.coords;
     const lat = crd.latitude.toFixed(0);
     const lon = crd.longitude.toFixed(0);
-    console.log(lat, lon);
     const latLonAPI = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=07d208f726a6eed3c065b6ee7c138516&units=imperial`;
 
     fetch(latLonAPI)
@@ -37,12 +40,17 @@ class WindowWeather extends React.Component {
         if (!response.ok) {
           throw Error(alert("Invalid Latitude & Longitude."));
         }
-        return response.json()
-      }).then(data => this.setState({ api: data, isLoaded: true }))
+        return response.json();
+      })
+      .then(
+        (data) => (
+          this.setState({ api: data, isLoaded: true }),
+          this.handleTimeSunMoon(data.sys.sunrise, data.sys.sunset)
+        )
+      )
       .catch(function (error) {
         console.log(error);
       });
-
   }
 
   errorLatLong(err) {
@@ -77,17 +85,34 @@ class WindowWeather extends React.Component {
     }
   };
 
+  handleTimeSunMoon(sunrise, sunset) {
+    const sun = Number(sunrise);
+    const moon = Number(sunset);
+    const newTime = new Date();
+    const timeSeconds = String(newTime.getTime()).slice(0, 10);
+    console.log(sun, "sun", moon, "moon", timeSeconds, "time");
+    if (isNaN(Number(timeSeconds))) return;
+    if (Number(timeSeconds) >= sun && timeSeconds < moon) {
+      this.setState({ sun: true });
+    } else if (Number(timeSeconds) >= moon) {
+      this.setState({ sun: false });
+    }
+
+    console.log(this.state.sun);
+  }
+
   render() {
     const { name, main } = this.state.api;
     return (
       <div className="container">
         <div className="header">
           <div>
-            {this.state.isLoaded ? <h1>{name}</h1> : <h1>Enter Location<div className="loading-location"></div></h1>}
+            {this.state.isLoaded ? <h1>{name}</h1> : <h1>Enter Location</h1>}
           </div>
           <InputZip handleSubmitZip={this.handleNewZip} />
         </div>
         <Window
+          dayNight={this.state.sun}
           weatherID={this.state.api.weather}
           isLoaded={this.state.isLoaded}
         />
