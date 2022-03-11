@@ -9,58 +9,72 @@ class WindowWeather extends React.Component {
   constructor(props) {
     super(props);
     this.state = { api: [], isLoaded: false, zipCode: "" };
+
+    this.handleLatLong = this.handleLatLong.bind(this);
+    this.successLatLong = this.successLatLong.bind(this)
+    this.errorLatLong = this.errorLatLong.bind(this)
   }
 
   componentDidMount() {
+    this.handleLatLong();
+  }
+
+  handleLatLong() {
     if (window.navigator.geolocation) {
-      window.navigator.geolocation.getCurrentPosition(success, error);
+      window.navigator.geolocation.getCurrentPosition(this.successLatLong, this.errorLatLong);
     }
+  }
 
-    function success(pos) {
-      var crd = pos.coords;
+ successLatLong(pos) {
+    var crd = pos.coords;
+    const lat = crd.latitude.toFixed(0);
+    const lon = crd.longitude.toFixed(0);
+    console.log(lat, lon);
+    const latLonAPI = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=07d208f726a6eed3c065b6ee7c138516&units=imperial`;
 
-      console.log("Your current position is:");
-      console.log(`Latitude : ${crd.latitude}`);
-      console.log(`Longitude: ${crd.longitude}`);
-      console.log(`More or less ${crd.accuracy} meters.`);
-    }
+    fetch(latLonAPI)
+      .then(function (response) {
+        if (!response.ok) {
+          throw Error(alert("Invalid Latitude & Longitude."));
+        }
+        return response.json()
+      }).then(data => this.setState({ api: data, isLoaded: true }))
+      .catch(function (error) {
+        console.log(error);
+      });
 
-    function error(err) {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
-    }
+  }
+
+  errorLatLong(err) {
+    console.log(`ERROR(${err.code}): ${err.message}`);
   }
 
   handleNewZip = async (zip) => {
-
-try {
-    const zipcodeAPI = `http://api.openweathermap.org/geo/1.0/zip?zip=${zip},US&appid=07d208f726a6eed3c065b6ee7c138516&units=imperial`;
-    const getLocation = await fetch(zipcodeAPI)
-      .then(function (response) {
-        if (!response.ok) {
-          throw Error(alert("Enter a valid Zip Code."));
-        }
-        return response;
-      })
-      .catch(function (error) {
-        console.log(error);
-        
-      });
-    const data = await getLocation.json();
-    var newLocation = await data.name;
-    // RECALL API TO GET ALL INFO
-    var api = `https://api.openweathermap.org/data/2.5/weather?q=${newLocation}&appid=07d208f726a6eed3c065b6ee7c138516&units=imperial`;
-    fetch(api)
-      .then((res) => res.json())
-      .then((data) => this.setState({ api: data, isLoaded: true }))
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-  catch(e)
-  {
-    //UHHHHH
-  }
-    
+    try {
+      const zipcodeAPI = `http://api.openweathermap.org/geo/1.0/zip?zip=${zip},US&appid=07d208f726a6eed3c065b6ee7c138516&units=imperial`;
+      const getLocation = await fetch(zipcodeAPI)
+        .then(function (response) {
+          if (!response.ok) {
+            throw Error(alert("Enter a valid Zip Code."));
+          }
+          return response;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      const data = await getLocation.json();
+      var newLocation = await data.name;
+      // RECALL API TO GET ALL INFO
+      var api = `https://api.openweathermap.org/data/2.5/weather?q=${newLocation}&appid=07d208f726a6eed3c065b6ee7c138516&units=imperial`;
+      fetch(api)
+        .then((res) => res.json())
+        .then((data) => this.setState({ api: data, isLoaded: true }))
+        .catch(function (error) {
+          console.log(error);
+        });
+    } catch (e) {
+      //UHHHHH FILL THIS?
+    }
   };
 
   render() {

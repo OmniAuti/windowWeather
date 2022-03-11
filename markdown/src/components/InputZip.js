@@ -15,10 +15,10 @@ class InputZip extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if (this.state.zip.length < 5) return alert("Enter a valid Zip Code.");
+    if (this.state.zip.length < 5) return alert("Enter a valid US Zip Code.");
     if (this.state.zip == "" || this.state.zip == " ")
-      return alert("Enter a valid Zip Code.");
-    if (isNaN(this.state.zip)) return alert("Enter a valid Zip Code.");
+      return alert("Enter a valid US Zip Code.");
+    if (isNaN(this.state.zip)) return alert("Enter a valid US Zip Code.");
 
     this.props.handleSubmitZip(this.state.zip);
     this.setState({ zip: "" });
@@ -36,7 +36,7 @@ class InputZip extends React.Component {
       <form className="form" onSubmit={this.handleSubmit}>
         <input
           value={this.state.zip}
-          placeholder="Zip Code"
+          placeholder="US Zip Code"
           onKeyPress={this.handleKeyPress}
           onChange={this.handleChange}
           maxLength="5"
