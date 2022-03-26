@@ -59,7 +59,7 @@ class WindowWeather extends React.Component {
 
   handleNewZip = async (zip) => {
     try {
-      const zipcodeAPI = `http://api.openweathermap.org/geo/1.0/zip?zip=${zip},US&appid=07d208f726a6eed3c065b6ee7c138516&units=imperial`;
+      const zipcodeAPI = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=07d208f726a6eed3c065b6ee7c138516`;
       const getLocation = await fetch(zipcodeAPI)
         .then(function (response) {
           if (!response.ok) {
@@ -81,7 +81,7 @@ class WindowWeather extends React.Component {
           console.log(error);
         });
     } catch (e) {
-      //UHHHHH FILL THIS?
+      console.log(e)
     }
   };
 
